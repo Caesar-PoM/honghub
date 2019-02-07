@@ -1,0 +1,14 @@
+<h2>{{ username }}</h2>
+
+<h3>Time slot</h3>
+
+<form action="{% url 'booking:booking' username.id %}" method="post">
+{% csrf_token %}
+{% %}
+</form>
+
+<ul>
+{% for slot in time_slot_list %}
+  <li>{{ slot }}</li>
+{% endfor %}
+</ul>
