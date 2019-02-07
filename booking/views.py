@@ -1,9 +1,11 @@
+from datetime import datetime
+
 from django.shortcuts import get_object_or_404 ,render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 
-from .models import Room, TimeSlot
+from .models import Room, TimeSlot, Meeting, Username
 
 # Create your views here.
 def index(request):
@@ -13,12 +15,14 @@ def index(request):
 def dashboard(request, username):
     """
     This page will serve as user's dashboard - showing how many meeting
-    users will have for the time period they choose (default = weekly).
+    users will have for the time period they choose (default = today).
     There will be entry to start booking meeting rooms from this page as well
     """
-    time_slot_list = TimeSlot.objects.all()
+    username_id = Username.objects.get(username=username).id
+    meeting_list = Meeting.objects.filter(username_id=username_id,
+                                        meeting_date=datetime.today())
     return render(request, 'booking/dashboard.html', {
-        'time_slot_list': time_slot_list,
+        'meeting_list': meeting_list,
         'username': username})
 
 

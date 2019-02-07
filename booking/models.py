@@ -35,11 +35,18 @@ class Username(models.Model):
     tel_num = models.CharField(max_length=15)
     email = models.EmailField(max_length=30)
 
+    def __str__(self):
+        return self.username
+
 
 class Meeting(models.Model):
+    subject = models.CharField(max_length=50)
     meeting_date = models.DateField('date booked')
-    room_id = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_time_slot = models.TimeField()
     stop_time_slot = models.TimeField()
     period = models.TimeField()
     username = models.ForeignKey(Username, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.subject
