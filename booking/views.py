@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import get_object_or_404 ,render
+from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.views import generic
 
@@ -7,11 +7,7 @@ from .models import Room, TimeSlot
 
 # Create your views here.
 def index(request):
-    """
-    This page will be used as landing page. This page should have
-    register and login button for new existing users respectively
-    """
-    return HttpResponse('Index')
+    return render(request, 'booking/index.html')
 
 
 def dashboard(request, username):
@@ -26,9 +22,9 @@ def dashboard(request, username):
         'username': username})
 
 
-def booking(request):
+def create_meeting(request, username):
     """
     This page will be the booking flow. Nots sure whether I should put This
     as part of user dashboard or start a new page.
     """
-    return HttpResponse('booking flow')
+    return render(request, 'booking/create_meeting.html', {'username': username})

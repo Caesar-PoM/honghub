@@ -2,9 +2,9 @@
 
 <h3>Time slot</h3>
 
-<form action="{% url 'booking:booking' username.id %}" method="post">
+<form action="{% url 'booking:create_meeting' username %}" method="post">
 {% csrf_token %}
-{% %}
+<input type="submit" value="Create Meeting">
 </form>
 
 <ul>
